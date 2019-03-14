@@ -1,0 +1,33 @@
+@import 'theme';;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: app-padding();
+
+  > form {
+    flex: none;
+    display: grid;
+    grid-template-columns: minmax(80px, 120px) auto;
+    grid-column-gap: 1em;
+    grid-row-gap: .5em;
+    grid-template-rows: auto;
+
+    border: 1px solid accentColor(.25);
+    border-radius: 5px;
+    padding: 1em;
+    @include grid-container-align-items(center);
+  }
+
+  > header {
+    flex: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2em;
+
+    > h2 {
+      font-size: 1.1em;
+    }
+  }
+}

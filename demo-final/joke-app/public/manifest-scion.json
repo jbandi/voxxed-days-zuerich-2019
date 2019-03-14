@@ -1,0 +1,26 @@
+{
+  "name": "Joke Application",
+  "capabilities": [
+    {
+      "type": "view",
+      "qualifier": {
+        "entity": "joke"
+      },
+      "description": "Show a random joke.",
+      "private": false,
+      "properties": {
+        "path": "jokes",
+        "title": "Joke"
+      }
+    }
+  ],
+  "intents": [
+    {
+      "type": "popup",
+      "qualifier": {
+        "entity": "contact",
+        "action": "create"
+      }
+    }
+  ]
+}

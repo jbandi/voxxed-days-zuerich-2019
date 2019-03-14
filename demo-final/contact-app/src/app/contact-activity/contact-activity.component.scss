@@ -1,0 +1,10 @@
+@import 'theme';
+
+:host {
+  display: flex;
+  padding: app-padding();
+
+  > vox-list {
+    flex: auto;
+  }
+}
