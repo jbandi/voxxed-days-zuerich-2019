@@ -1,4 +1,4 @@
-import React, { Component, SyntheticEvent } from 'react';
+import React, { Component, MouseEvent } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Platform, PopupService, RouterService } from '@scion/workbench-application.core';
@@ -6,10 +6,6 @@ import { Platform, PopupService, RouterService } from '@scion/workbench-applicat
 class App extends Component<{}, { joke: string }> {
   state = {
     joke: '...'
-  };
-  createPerson = (event: SyntheticEvent) => {
-    Platform.getService(PopupService)
-      .open({anchor: event.target as Element, position: 'north'}, {entity: 'contact', action: 'create'})
   };
 
   componentDidMount(): void {
@@ -20,6 +16,10 @@ class App extends Component<{}, { joke: string }> {
       });
   }
 
+  createPerson = (event: MouseEvent<HTMLButtonElement>) => {
+    Platform.getService(PopupService)
+        .open({anchor: event.currentTarget, position: 'north'}, {entity: 'contact', action: 'create'})
+  };
 
   render() {
     return (
@@ -27,9 +27,7 @@ class App extends Component<{}, { joke: string }> {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p> Here is your personal joke:</p>
-          <p>
-            {this.state.joke}
-          </p>
+          <p>{this.state.joke}</p>
           <button onClick={this.createPerson}>Create Contact</button>
         </header>
       </div>
