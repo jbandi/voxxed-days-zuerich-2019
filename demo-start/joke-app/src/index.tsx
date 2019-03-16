@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { PlatformActivator } from '@scion/workbench-application.core';
-
-PlatformActivator.start();
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
