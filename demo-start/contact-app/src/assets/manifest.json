@@ -2,68 +2,7 @@
   "name": "Contact Application",
   "baseUrl": "#",
   "capabilities": [
-    {
-      "type": "activity",
-      "qualifier": {
-        "entity": "contacts"
-      },
-      "description": "Lists all contacts and allows to show their personal data.",
-      "properties": {
-        "title": "Contacts",
-        "itemText": "person_outline",
-        "itemCssClass": "material-icons",
-        "path": "contacts"
-      }
-    },
-    {
-      "type": "view",
-      "qualifier": {
-        "entity": "contact",
-        "id": "*"
-      },
-      "description": "Shows personal data of a contact.",
-      "properties": {
-        "path": "contacts/:id",
-        "title": "Contact"
-      }
-    },
-    {
-      "type": "popup",
-      "qualifier": {
-        "entity": "contact",
-        "action": "create"
-      },
-      "private": false,
-      "description": "Allows to create a new contact.",
-      "properties": {
-        "path": "contacts/new",
-        "width": "400px",
-        "height": "390px"
-      }
-    }
   ],
   "intents": [
-    {
-      "type": "view",
-      "qualifier": {
-        "entity": "communication",
-        "presentation": "list",
-        "contactId": "*"
-      }
-    },
-    {
-      "type": "popup",
-      "qualifier": {
-        "entity": "communication",
-        "action": "create",
-        "contactId": "*"
-      }
-    },
-    {
-      "type": "view",
-      "qualifier": {
-        "entity": "joke"
-      }
-    }
   ]
 }

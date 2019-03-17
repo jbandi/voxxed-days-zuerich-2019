@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { ContactRoutingModule } from './contact-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SciViewportModule } from '@scion/viewport';
 import { WorkbenchApplicationModule } from '@scion/workbench-application.angular';
@@ -35,6 +35,7 @@ import { A11yModule } from '@angular/cdk/a11y';
     AppRoutingModule,
     CommonModule,
     SciViewportModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     WorkbenchApplicationModule.forRoot(),
