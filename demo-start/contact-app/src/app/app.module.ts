@@ -8,7 +8,6 @@ import { ContactRoutingModule } from './contact-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SciViewportModule } from '@scion/viewport';
-import { WorkbenchApplicationModule } from '@scion/workbench-application.angular';
 import { ContactActivityComponent } from './contact-activity/contact-activity.component';
 import { ContactViewComponent } from './contact-view/contact-view.component';
 import { ContactNewPopupComponent } from './contact-new-popup/contact-new-popup.component';
@@ -38,7 +37,6 @@ import { A11yModule } from '@angular/cdk/a11y';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    WorkbenchApplicationModule.forRoot(),
     A11yModule,
     ContactRoutingModule,
   ],
