@@ -2,8 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { filter, map, mergeMapTo, take, tap } from 'rxjs/operators';
 import { EMPTY, MonoTypeOperatorFunction, Observable, OperatorFunction, Subject } from 'rxjs';
-import { VoxSessionStorageService } from './session-storage.service';
-import { toFilterRegExp } from './vox-filter-field/filter-field.component';
+import { SessionStorageService } from './session-storage.service';
 import { Contact } from './contact.model';
 import { WorkbenchRouter } from '@scion/workbench-application.angular';
 
@@ -13,16 +12,18 @@ const PERSONS_STORAGE_KEY = 'contact.data';
 export class ContactService implements OnDestroy {
 
   private _destroy$ = new Subject<void>();
-  private _contacts$: Observable<ContactDictionary>;
+  private _contactDictionary$: Observable<ContactDictionary>;
+  public contacts$: Observable<Contact[]>;
 
-  constructor(httpClient: HttpClient, private _storage: VoxSessionStorageService, private _router: WorkbenchRouter) {
-    this._contacts$ = this._storage.observe$(PERSONS_STORAGE_KEY, () => {
+  constructor(httpClient: HttpClient, private _storage: SessionStorageService, private _router: WorkbenchRouter) {
+    this._contactDictionary$ = this._storage.observe$(PERSONS_STORAGE_KEY, () => {
       return httpClient.get<Contact[]>('assets/contact.data.json').pipe(mapToContactDictionary());
     });
+    this.contacts$ = this._contactDictionary$.pipe(mapToFilteredContactArray(null))
   }
 
   public contact$(id: string, options?: { once: boolean }): Observable<Contact> {
-    return this._contacts$
+    return this._contactDictionary$
       .pipe(
         options && options.once ? take(1) : tap(),
         map(dictionary => dictionary[id]),
@@ -30,12 +31,8 @@ export class ContactService implements OnDestroy {
       );
   }
 
-  public contacts$(ids?: string[]): Observable<Contact[]> {
-    return this._contacts$.pipe(mapToFilteredContactArray(ids));
-  }
-
   public create$(contact: Contact): Observable<never> {
-    return this._contacts$
+    return this._contactDictionary$
       .pipe(
         once(),
         putContact(this._storage, contact),
@@ -44,7 +41,7 @@ export class ContactService implements OnDestroy {
   }
 
   public update$(contact: Contact): Observable<never> {
-    return this._contacts$
+    return this._contactDictionary$
       .pipe(
         once(),
         putContact(this._storage, contact),
@@ -53,7 +50,7 @@ export class ContactService implements OnDestroy {
   }
 
   public delete$(id: string): Observable<never> {
-    return this._contacts$
+    return this._contactDictionary$
       .pipe(
         once(),
         deleteContact(this._storage, id),
@@ -87,14 +84,14 @@ function mapToFilteredContactArray(ids: string[]): OperatorFunction<ContactDicti
   });
 }
 
-function putContact(storage: VoxSessionStorageService, contact: Contact): MonoTypeOperatorFunction<ContactDictionary> {
+function putContact(storage: SessionStorageService, contact: Contact): MonoTypeOperatorFunction<ContactDictionary> {
   return tap((dictionary: ContactDictionary): void => {
     dictionary[contact.id] = contact;
     storage.put(PERSONS_STORAGE_KEY, dictionary);
   });
 }
 
-function deleteContact(storage: VoxSessionStorageService, id: string): MonoTypeOperatorFunction<ContactDictionary> {
+function deleteContact(storage: SessionStorageService, id: string): MonoTypeOperatorFunction<ContactDictionary> {
   return tap((dictionary: ContactDictionary): void => {
     delete dictionary[id];
     storage.put(PERSONS_STORAGE_KEY, dictionary);
@@ -103,15 +100,4 @@ function deleteContact(storage: VoxSessionStorageService, id: string): MonoTypeO
 
 function once<T>(): MonoTypeOperatorFunction<T> {
   return take(1);
-}
-
-export function filterContacts(): OperatorFunction<[string, Contact[]], Contact[]> {
-  return map(([filterText, contacts]: [string, Contact[]]): Contact[] => {
-    if (!filterText) {
-      return contacts;
-    }
-
-    const filterRegExp = toFilterRegExp(filterText);
-    return contacts.filter(contact => filterRegExp.test(contact.firstname) || filterRegExp.test(contact.lastname) || filterRegExp.test(contact.city));
-  });
 }
