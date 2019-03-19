@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, MouseEvent } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
