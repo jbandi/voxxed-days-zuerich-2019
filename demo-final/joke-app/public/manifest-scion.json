@@ -3,13 +3,13 @@
   "capabilities": [
     {
       "type": "view",
+      "description": "Shows a random joke",
+      "private": false,
       "qualifier": {
         "entity": "joke"
       },
-      "description": "Show a random joke.",
-      "private": false,
       "properties": {
-        "path": "jokes",
+        "path": "",
         "title": "Joke"
       }
     }

@@ -3,15 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { WorkbenchApplicationPlatformModule } from '@scion/workbench-application-platform';
-import { WorkbenchModule } from '@scion/workbench';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { WorkbenchModule } from '@scion/workbench';
+import { WorkbenchApplicationPlatformModule } from '@scion/workbench-application-platform';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
     WorkbenchModule.forRoot(),
     WorkbenchApplicationPlatformModule.forRoot({
       applicationConfig:
@@ -31,9 +34,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
           }
         ],
     }),
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule
   ],
   providers: [],
   bootstrap:

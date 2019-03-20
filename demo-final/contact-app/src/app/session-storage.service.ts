@@ -14,7 +14,7 @@ const LOADING_HINT = 'LOADING_HINT [SessionStorageService]';
  * (as long as the browser is open, including page reloads and restores).
  */
 @Injectable({providedIn: 'root'})
-export class VoxSessionStorageService {
+export class SessionStorageService {
 
   private _currentDocumentChange$ = new Subject<string>();
 

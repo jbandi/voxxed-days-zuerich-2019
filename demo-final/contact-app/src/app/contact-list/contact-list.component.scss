@@ -2,28 +2,21 @@
 
 :host {
   display: flex;
-  flex-direction: column;
-  outline: none;
+  padding: app-padding();
 
-  > vox-filter-field {
-    flex: none;
-
-    &.top {
-      margin-bottom: .3em;
-    }
-
-    &.bottom {
-      margin-top: .3em;
-    }
-  }
-
-  > sci-viewport {
+  > ul {
     flex: auto;
+    margin: 0;
+    padding: 0;
+    list-style: none;
     border: 1px solid accentColor(.25);
     border-radius: 5px;
     padding: .5em;
+    color: primaryColor();
 
-    vox-list-item {
+    > li {
+      padding: 1em;
+
       &:not(:first-child) {
         border-top: 1px solid accentColor(.25);
       }

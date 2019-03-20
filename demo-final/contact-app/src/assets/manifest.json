@@ -7,7 +7,7 @@
       "qualifier": {
         "entity": "contacts"
       },
-      "description": "Lists all contacts and allows to show their personal data.",
+      "description": "Lists all contacts",
       "properties": {
         "title": "Contacts",
         "itemText": "person_outline",
@@ -24,7 +24,7 @@
       "description": "Shows personal data of a contact.",
       "properties": {
         "path": "contacts/:id",
-        "title": "Contact"
+        "heading": "Contact"
       }
     },
     {
@@ -43,22 +43,6 @@
     }
   ],
   "intents": [
-    {
-      "type": "view",
-      "qualifier": {
-        "entity": "communication",
-        "presentation": "list",
-        "contactId": "*"
-      }
-    },
-    {
-      "type": "popup",
-      "qualifier": {
-        "entity": "communication",
-        "action": "create",
-        "contactId": "*"
-      }
-    },
     {
       "type": "view",
       "qualifier": {

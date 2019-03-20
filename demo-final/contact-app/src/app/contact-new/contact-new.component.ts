@@ -14,14 +14,14 @@ const EMAIL = 'email';
 const PHONE = 'phone';
 
 @Component({
-  selector: 'app-contact-new-popup',
-  templateUrl: './contact-new-popup.component.html',
-  styleUrls: ['./contact-new-popup.component.scss'],
+  selector: 'app-contact-new',
+  templateUrl: './contact-new.component.html',
+  styleUrls: ['./contact-new.component.scss'],
   providers: [
-    provideWorkbenchPopup(ContactNewPopupComponent)
+    provideWorkbenchPopup(ContactNewComponent)
   ]
 })
-export class ContactNewPopupComponent implements OnDestroy {
+export class ContactNewComponent implements OnDestroy {
 
   public readonly FIRSTNAME = FIRSTNAME;
   public readonly LASTNAME = LASTNAME;
